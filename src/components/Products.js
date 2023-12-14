@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { SEARCH_ENDPOINT } from '../utils/util'
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
+import Col from 'react-bootstrap/Col';
+import Product from './Product';
+
 
 export default function Products() {
   const [products, setProducts] = useState({
@@ -27,26 +29,13 @@ export default function Products() {
   }, [])
 
   return (
-    <Row xs={1} md={5} className="g-4">
-      {products?.allBooks?.map((book, i) =>
-        <div key={book.isbn13 + '-' + i}>
-          <Card style={{ width: '18rem' }} bg='light'>
-            <Card.Img variant="top" src={book.image} />
-            <Card.Body className="text-center">
-              <Card.Title>{book.title}</Card.Title>
-              <Card.Text>
-                {book.subTitle}
-              </Card.Text>
-              <Card.Text>
-                {book.price}
-              </Card.Text>
-            </Card.Body>
-            <Card.Footer className="text-center">
-              <Button variant="primary">Add to cart</Button>
-            </Card.Footer>
-          </Card>
-        </div>
-      )}
-    </Row>
+    <Col justify-content='center'>
+      {products?.allBooks.length < 1 && <Spinner animation="grow" variant="primary" />}
+      <Row xs={1} md={5} className="g-4">
+        {products?.allBooks?.map((book, i) =>
+          <Product book={book} key={book.isbn13 + '-' + i} />
+        )}
+      </Row>
+    </Col>
   )
 }
