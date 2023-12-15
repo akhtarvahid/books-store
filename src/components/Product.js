@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-export default function Product({ book }) {
+export default function Product({ book, addToCartFn }) {
     return (
         <div>
             <Card bg='light'>
@@ -17,7 +17,7 @@ export default function Product({ book }) {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className="text-center">
-                    <Button variant="primary">Add to cart</Button>
+                    <Button variant="primary" onClick={() => addToCartFn(book)}>Add to cart</Button>
                 </Card.Footer>
             </Card>
         </div>
