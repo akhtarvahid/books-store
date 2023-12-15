@@ -1,9 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
+    const bagItems = useSelector(state => state.cart);
+
     return (
         <Navbar expand='lg' bg="dark" data-bs-theme="dark">
             <Container fluid>
@@ -14,7 +17,7 @@ function NavBar() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className='justify-content-end'>
                     <Navbar.Text>
-                        <Nav.Link to="/cart" as={Link}>Cart</Nav.Link>
+                        <Nav.Link to="/cart" as={Link}>Bag {bagItems.length > 0 && <span>{bagItems.length}</span>}</Nav.Link>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>
