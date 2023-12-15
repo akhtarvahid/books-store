@@ -9,6 +9,7 @@ import { addBook } from '../store/cartSlice';
 
 
 export default function Products() {
+  const [selectTech, setSelectTech] = useState('all');
   const dispatch = useDispatch();
   const [products, setProducts] = useState({
     allBooks: []
@@ -19,7 +20,7 @@ export default function Products() {
       const noOfApiCalls = [1, 2, 3, 4];
       await Promise.all(
         noOfApiCalls.map(async (id) => {
-          const res = await fetch(`${SEARCH_ENDPOINT}/mongodb?page=${id}`)
+          const res = await fetch(`${SEARCH_ENDPOINT}/${selectTech}?page=${id}`)
           const response = await res.json();
           setProducts(products => ({
             response,
@@ -29,7 +30,7 @@ export default function Products() {
       )
     }
     getAllBooks();
-  }, [])
+  }, [selectTech])
 
   const addToCartFn = (book) => {
     // dispatch an addBook action
@@ -39,13 +40,31 @@ export default function Products() {
 
   return (
     <Col justify-content='center'>
-      {products?.allBooks.length < 1 && <Spinner animation="grow" variant="primary" />}
+      <div>
+        <select onChange={(e) => {
+          setSelectTech(e.target.value);
+          setProducts({
+            ...products,
+            allBooks: []
+          });
+
+        }}>
+          <option value='all'>All</option>
+          <option value='JavaScript'>Javascript</option>
+          <option value='Java'>Java</option>
+          <option value='CSS'>CSS</option>
+          <option value='mongodb'>Mongodb</option>
+          <option value='Zookeeper'>Zookeeper</option>
+        </select>
+        {/* <input type='text' placeholder='Enter technology name to search' onChange={(e) => setSelectTech(e.target.name)}/> */}
+      </div>
+      {products?.allBooks?.length < 1 && <Spinner animation="grow" variant="primary" />}
       <Row xs={1} md={5} className="g-4">
         {products?.allBooks?.map((book, i) =>
-          <Product 
-           book={book} 
-           key={book.isbn13 + '-' + i}
-           addToCartFn={addToCartFn}
+          <Product
+            book={book}
+            key={book.isbn13 + '-' + i}
+            addToCartFn={addToCartFn}
           />
         )}
       </Row>
