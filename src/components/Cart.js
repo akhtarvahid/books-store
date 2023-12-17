@@ -20,9 +20,9 @@ export default function Cart() {
       <Row xs={12} md={12} className="g-4">
         {bagBooks.map(book =>
           <Card bg='light' style={rowStyle}>
-            <Card style={{ width: '30%' }}>
-              <Card.Img variant="top" src={book.image} style={{ width: 420, height: 500, marginBlock: -70, marginLeft: 60 }} />
-              <Card.Body className="text-center">
+            <Card style={{ width: '20%' }}>
+              <Card.Img variant="top" src={book.image} style={{ width: 420, height: 500,  marginLeft: -32 }} />
+              <Card.Body className="text-center" style={{ marginTop: -60 }}>
                 <Card.Title>{book.title}</Card.Title>
                 <Card.Text>
                   {book.subTitle}
@@ -31,11 +31,13 @@ export default function Cart() {
                   {book.price}
                 </Card.Text>
               </Card.Body>
+            </Card>
+            <div style={{ textAlign: 'center'}}>
+              <Card.Text>0</Card.Text>
               <Card.Footer className="text-center">
                 <Button variant="primary">Remove</Button>
               </Card.Footer>
-            </Card>
-            <div>0</div>
+            </div>
           </Card>
         )}
       </Row>
