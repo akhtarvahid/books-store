@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
-    const bagItems = useSelector(state => state.cart);
+    const bagItems = useSelector(state => state.cart.books);
 
     return (
         <Navbar expand='lg' bg="dark" data-bs-theme="dark">
