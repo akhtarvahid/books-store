@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cartSlice";
+import bookProductsSlice from "./bookProductsSlice";
 
 
 // configureStore: which do lots of configuration for us
@@ -7,7 +8,8 @@ import cartSlice from "./cartSlice";
 // 2. by default thunk middleware is available in configureStore
 const store = configureStore({
     reducer: {
-        cart: cartSlice
+        cart: cartSlice,
+        bookProducts: bookProductsSlice
     }
 })
 
