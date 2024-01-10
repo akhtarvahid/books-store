@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 export default function Product({ book, addToCartFn, removeFromCartFn }) {
     const bagItems = useSelector(state => state.cart.books);
     const included = bagItems?.find(item => item.title === book.title);
-    //console.log('bagItems::: ', bagItems, included);
     return (
         <Card bg='light' style={{ padding: 0 }}>
             <Card.Img variant="top" src={book.image} />

@@ -29,7 +29,16 @@ export default function Products() {
     dispatch(removeBook(book));
   }
 
-  console.log('products: ', bookProducts)
+  if (bookProducts.loading) {
+    return <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh'
+    }}>
+      <Spinner animation="grow" variant="primary" />
+    </div>
+  }
 
   return (
     <Col justify-content='center'>
