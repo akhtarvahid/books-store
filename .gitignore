@@ -5,9 +5,6 @@
 /.pnp
 .pnp.js
 
-# file to ignore
-/src/utils/util.js
-
 # testing
 /coverage
 
